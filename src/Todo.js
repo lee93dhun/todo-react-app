@@ -13,6 +13,7 @@ class Todo extends React.Component{
         super(props);
         this.state = {item: props.item, readOnly: true};
         this.delete = props.delete;
+        this.update = props.update;
       }
 
       deleteEventHandler = () => {
@@ -29,19 +30,21 @@ class Todo extends React.Component{
       enterKeyEventHandler = (e) => {
         if(e.key === "Enter"){
             this.setState({ readOnly: true });
+            this.update(this.state.item);
         }
-      }
+      };
 
       editEventHandler = (e) =>{
         const thisItem = this.state.item;
         thisItem.title = e.target.value;
-        this.setState({ item: thisItem});
+        this.setState({ item: thisItem}); // 엔터를 누르면 저장
       }
 
       checkboxEventHandler = (e) =>{
         const thisItem = this.state.item;
         thisItem.done = !thisItem.done;
         this.setState({ item:thisItem});
+        this.update(this.state.item); // 체크박스가 변경되면 저장
       }
 
       render(){

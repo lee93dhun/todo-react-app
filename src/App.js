@@ -20,6 +20,8 @@ class App extends React.Component{
     );
   };
   
+  // call 함수 이전 코드
+  //
   // add = (item) => {
   //   const thisItems = this.state.items;
   //   item.id = "ID-"+thisItems.length; // key를 위한 id 추가
@@ -35,6 +37,8 @@ class App extends React.Component{
     );
   };
 
+  // call 함수 이전 코드
+  //
   // delete = (item) => {
   //   const thisItems = this.state.items;
   //   console.log("Before Update Items : ", this.state.items)
@@ -45,17 +49,27 @@ class App extends React.Component{
   //   });
   // }
 
+  update = (item) =>{
+    call("/todo", "PUT", item).then((response) =>
+      this.setState({ items: response.data })
+    );
+  }
+
   render(){
     var todoItems = this.state.items.length > 0 && (
       <Paper style={{margin:16}}>
         <List>
           { this.state.items.map((item,idx) => (
-            <Todo item = {item} key={item.id} delete = {this.delete} />
+            <Todo 
+              item = {item}
+              key={item.id}
+              delete = {this.delete} 
+              update = {this.update}
+            />
           )) }
         </List>
       </Paper>
     );
-            console.log("log~~~~~")
     return (
       <div className="App">
         <Container maxWidth="md">
@@ -72,6 +86,8 @@ class App extends React.Component{
     )
   }
   
+  // call 함수 이전 코드
+  //
   // componentDidMount() {
   //   const requestOptions = {
   //     method: "GET",
